@@ -11,6 +11,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -19,19 +23,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class ProyectoClickin {
     static AppiumDriver<MobileElement> driver;
-
-    public static void main(String[] args) {
-        try {
-            abrirAplicacion();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void abrirAplicacion() throws Exception {
+    @BeforeClass
+    public void openMovil() throws MalformedURLException {
         DesiredCapabilities clickin = new DesiredCapabilities();
         clickin.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator1");
         clickin.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 2");
@@ -40,17 +37,22 @@ public class ProyectoClickin {
         clickin.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10");
         clickin.setCapability("appPackage", "mx.alphacredit.clickink");
         clickin.setCapability("appActivity", "mx.alphacredit.clickink.Splash");
-
-
         URL url = new URL("http://localhost:4723/wd/hub");
         driver = new AppiumDriver<MobileElement>(url, clickin);
         System.out.println("Application Started Successfully....");
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+    }
+    @AfterClass
+    public void closeMovil(){
+        driver.quit();
+    }
 
-
+    @Test
+    public void Flujo1() throws Exception {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         MobileElement btn_TerminarTutorial = driver.findElement(By.id("mx.alphacredit.clickink:id/btn_TerminarTutorial"));
         btn_TerminarTutorial.click();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         btn_TerminarTutorial.click();
         MobileElement permiso = driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button"));
         permiso.click();
@@ -63,7 +65,7 @@ public class ProyectoClickin {
         btnQR.click();
         MobileElement btn_EmpezarFirma = driver.findElement(By.id("mx.alphacredit.clickink:id/btn_EmpezarFirma"));
         btn_EmpezarFirma.click();
-
+        
 
         //sección de numeros de sms
         // mx.alphacredit.clickink:id/numberSMS222
