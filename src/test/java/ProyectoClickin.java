@@ -65,7 +65,7 @@ public class ProyectoClickin {
         btnQR.click();
         MobileElement btn_EmpezarFirma = driver.findElement(By.id("mx.alphacredit.clickink:id/btn_EmpezarFirma"));
         btn_EmpezarFirma.click();
-        
+
 
         //sección de numeros de sms
         // mx.alphacredit.clickink:id/numberSMS222
