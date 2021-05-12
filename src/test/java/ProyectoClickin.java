@@ -16,6 +16,8 @@ public class ProyectoClickin {
     public void openMovil() throws MalformedURLException {
         DesiredCapabilities clickin = new DesiredCapabilities();
         clickin.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator1");
+        clickin.setCapability(MobileCapabilityType.UDID, "emulator-5554");
+
         clickin.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 2");
         clickin.setCapability(MobileCapabilityType.APP, "C:\\Users\\fer\\Desktop\\AppiumClickin\\resources\\ClickInk-QA-3.0.9-2.apk");
         clickin.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
