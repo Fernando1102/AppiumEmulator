@@ -65,17 +65,10 @@ public class ProyectoClickin {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         MobileElement btn_EmpezarFirma = driver.findElement(By.id("mx.alphacredit.clickink:id/btn_EmpezarFirma"));
         btn_EmpezarFirma.click();
-        //imagen();
-
-        File file = new File("C:\\Users\\fer\\Desktop\\AppiumClickin\\resources\\imgQR_QA.png");
-        byte[] array = Files.readAllBytes(file.toPath());
-        String qrCodeImage = Base64.getEncoder().encodeToString(array);
-        ((JavascriptExecutor)driver).executeScript("sauce:inject-image=" + qrCodeImage);
-
-        System.out.println("codigo.." + qrCodeImage);
-
-
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.MINUTES);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
+        MobileElement smsNumber = driver.findElement(By.id("mx.alphacredit.clickink:id/numberSMS222"));
+        smsNumber.sendKeys("456643");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
 
 
 
